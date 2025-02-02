@@ -1,0 +1,11 @@
+[package]
+name = "clighlighter"
+version = "0.1.0"
+edition = "2024"
+
+[build-dependencies]
+cc = "*"
+
+[dependencies]
+tree-sitter = "0.25.1"
+tree-sitter-typescript = "0.23.2"
