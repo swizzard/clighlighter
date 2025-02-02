@@ -7,5 +7,6 @@ edition = "2024"
 cc = "*"
 
 [dependencies]
+clap = { version = "4.5.27", features = ["cargo", "derive"] }
 tree-sitter = "0.25.1"
 tree-sitter-typescript = "0.23.2"
