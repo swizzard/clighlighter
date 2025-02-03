@@ -111,6 +111,7 @@ Options:
   - [x] not just ts
   - [x] cli argument
 - [ ] improve performance by writing directly to output
+- [ ] tests
 
 ## contributing/extension
 
