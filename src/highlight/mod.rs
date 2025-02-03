@@ -6,6 +6,11 @@ pub mod ts;
 use std::fmt::Write;
 use tree_sitter::{Language, Node, Parser, Point, TreeCursor};
 
+pub trait Highlight {
+    fn language(&self) -> Language;
+    fn highlight_node(&self, node: &Node, input: &str, prev_end: Option<Point>) -> String;
+}
+
 pub fn highlight(h: &dyn Highlight, input: &str) -> String {
     let mut parser = Parser::new();
     parser
@@ -61,9 +66,4 @@ fn next_more(cursor: &mut TreeCursor<'_>, skip_child: bool) -> bool {
     };
 
     more
-}
-
-pub trait Highlight {
-    fn language(&self) -> Language;
-    fn highlight_node(&self, node: &Node, input: &str, prev_end: Option<Point>) -> String;
 }
