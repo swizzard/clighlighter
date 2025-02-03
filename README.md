@@ -27,7 +27,7 @@ Options:
   - [ ] more `kind`s
   - [ ] non-alpha `kind`s/mapping names
 - [ ] flexibility
-  - [ ] trait
+  - [x] trait
   - [ ] not just ts
   - [ ] cli argument
 - [ ] improve performance by writing directly to output
