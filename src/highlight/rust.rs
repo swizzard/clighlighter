@@ -9,6 +9,7 @@ static RUST_SPECIAL: LazyLock<HashSet<&str>> = LazyLock::new(|| {
     HashSet::from([
         "&",
         "boolean_literal", // NOT "false", "true"
+        "char_literal",
         "crate",
         "else",
         "enum",

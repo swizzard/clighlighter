@@ -23,6 +23,7 @@ do not find them particularly informative. using the debug-printing `highlighter
 
 - `&`
 - `boolean_literal`
+- `char_literal`
 - `crate`
 - `else`
 - `enum`

@@ -1,5 +1,5 @@
 /target
 *.ts
-output.txt
+output*.txt
 notes.md
 

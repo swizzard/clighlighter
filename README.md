@@ -53,7 +53,7 @@ output:
     #[<code class="identifier">arg</code>(<code class="identifier">short</code>, <code class="identifier">help</code> = <code class="string_literal">"path to output file, defaults to STDOUT"</code>)]
     <code class="pub">pub</code> <code class="field_identifier">out_file</code>: <code class="type_identifier">Option</code><<code class="type_identifier">String</code>>,
     #[<code class="identifier">arg</code>(
-        <code class="identifier">short</code> =    ,
+        <code class="identifier">short</code> = <code class="char_literal">'l'</code>,
         <code class="identifier">value_name</code> = <code class="string_literal">"LANGUAGE"</code>,
         <code class="identifier">help</code> = <code class="string_literal">"highlighter to use, defaults to TS"</code>,
         <code class="identifier">default_value</code> = <code class="string_literal">"ts"</code>
