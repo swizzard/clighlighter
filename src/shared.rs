@@ -27,3 +27,7 @@ pub(crate) fn initial_padding(node: &Node, prev_end: Option<Point>) -> String {
     }
     s
 }
+
+pub(crate) fn node_text<'a>(node: &'a tree_sitter::Node, input: &'a str) -> &'a str {
+    node.utf8_text(input.as_bytes()).expect("non-utf8 input")
+}

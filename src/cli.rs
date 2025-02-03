@@ -3,9 +3,9 @@ use clap::{Parser, ValueEnum};
 #[derive(Parser)]
 #[command(version, about, long_about = None)]
 pub struct Cli {
-    #[arg(help = "path to source file")]
+    #[arg(short, help = "path to source file")]
     pub in_file: String,
-    #[arg(help = "path to output file, defaults to STDOUT")]
+    #[arg(short, help = "path to output file, defaults to STDOUT")]
     pub out_file: Option<String>,
     #[arg(
         short = 'l',
@@ -20,4 +20,6 @@ pub struct Cli {
 pub enum HighlighterChoice {
     /// Typescript
     TS,
+    /// Rust
+    Rust,
 }

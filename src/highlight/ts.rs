@@ -1,5 +1,5 @@
 use crate::highlight::Highlight;
-use crate::initial_padding::initial_padding;
+use crate::shared::{initial_padding, node_text};
 use std::fmt::Write;
 use tree_sitter::{Language, Node, Point};
 
@@ -48,22 +48,15 @@ impl TS {
                 | "."
         )
     }
-
-    fn is_printed_node(k: &str, txt: &str) -> bool {
-        TS::is_special_node(k, txt) || TS::is_regular_node(k)
-    }
 }
 
 impl Highlight for TS {
     fn language(&self) -> Language {
         tree_sitter_typescript::LANGUAGE_TYPESCRIPT.into()
     }
-    fn is_printed_node(&self, node: &Node, input: &str) -> bool {
-        TS::is_printed_node(node.kind(), node.utf8_text(input.as_bytes()).unwrap())
-    }
     fn highlight_node(&self, node: &Node, input: &str, prev_end: Option<Point>) -> String {
         let k = node.kind();
-        let txt = node.utf8_text(input.as_bytes()).expect("non-utf8 input");
+        let txt = node_text(node, input);
         if TS::is_special_node(k, txt) {
             let mut s = initial_padding(node, prev_end);
             write!(&mut s, "<code class=\"{}\">{}</code>", k, txt).expect("can't write");

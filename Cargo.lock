@@ -117,6 +117,7 @@ dependencies = [
  "cc",
  "clap",
  "tree-sitter",
+ "tree-sitter-rust",
  "tree-sitter-typescript",
 ]
 
@@ -312,6 +313,16 @@ name = "tree-sitter-language"
 version = "0.1.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "38eee4db33814de3d004de9d8d825627ed3320d0989cce0dea30efaf5be4736c"
+
+[[package]]
+name = "tree-sitter-rust"
+version = "0.23.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a4d64d449ca63e683c562c7743946a646671ca23947b9c925c0cfbe65051a4af"
+dependencies = [
+ "cc",
+ "tree-sitter-language",
+]
 
 [[package]]
 name = "tree-sitter-typescript"
