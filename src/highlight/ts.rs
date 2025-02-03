@@ -12,18 +12,17 @@ impl TS {
         } else {
             matches!(
                 k,
-                "new"
-                    | "as"
-                    | "const"
+                "as" | "const"
                     | "export"
-                    | "interface"
-                    | "type_identifier"
-                    | "property_identifier"
-                    | "literal_type"
                     | "function"
-                    | "return"
-                    | "number"
                     | "identifier"
+                    | "interface"
+                    | "literal_type"
+                    | "new"
+                    | "number"
+                    | "property_identifier"
+                    | "return"
+                    | "type_identifier"
                     | "undefined"
             )
         }

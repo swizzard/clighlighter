@@ -71,6 +71,8 @@ output:
 </pre>
 ```
 
+[classes.md](src/highlight/classes.md) has lists of classes each highlighter produces
+
 ## usage
 
 ```
