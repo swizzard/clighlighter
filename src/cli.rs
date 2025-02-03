@@ -7,7 +7,12 @@ pub struct Cli {
     pub in_file: String,
     #[arg(help = "path to output file, defaults to STDOUT")]
     pub out_file: Option<String>,
-    #[arg(help = "highlighter to use, defaults to TS", default_value = "TS")]
+    #[arg(
+        short = 'l',
+        value_name = "LANGUAGE",
+        help = "highlighter to use, defaults to TS",
+        default_value = "ts"
+    )]
     pub highlighter: HighlighterChoice,
 }
 
