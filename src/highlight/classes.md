@@ -21,30 +21,46 @@ do not find them particularly informative. using the debug-printing `highlighter
 
 ### special kinds (will be rendered as `<code class="...">...</code>`)
 
-- `&`
-- `boolean_literal`
+- `as`
+- `async`
+- `await`
+- `block_comment`
+- `boolean_literal` (NOT `false`, `true`)
+- `break`
 - `char_literal`
+- `const`
 - `crate`
+- `dyn`
 - `else`
 - `enum`
+- `extern`
 - `field_identifier`
+- `float_literal`
 - `fn`
 - `for`
 - `identifier`
 - `if`
 - `impl`
+- `in`
+- `integer_literal`
 - `let`
-- `line_comment`
+- `line_comment` (includes newline)
+- `loop`
+- `match`
 - `mod`
 - `mutable_specifier`
 - `primitive_type`
 - `pub`
+- `raw_string_literal`
+- `ref`
 - `self`
 - `static`
 - `string_literal`
 - `struct`
+- `super`
 - `trait`
 - `type_identifier`
+- `unsafe`
 - `use`
 - `while`
 
@@ -56,19 +72,53 @@ do not find them particularly informative. using the debug-printing `highlighter
 - `::`
 - `{`
 - `}`
-- `,`
+- `
 - `:`
 - `=`
 - `.`
 - `<`
 - `>`
 - `'`
-- `\_`
+- `_`
 - `!`
 - `->`
+- `=>
 - `#`
 - `[`
-- `]`,
+- `]`
+- `!=`
+- `%`
+- `&&`
+- `&`
+- `*`
+- `+`
+- `-`
+- `/`
+- `<<`
+- `<<=`
+- `<=`
+- `==`
+- `>=
+- `>>=`
+- `>>`
+- `||`
+- `|`
+- `#`
+- `$`
+- `%`
+- `%=`
+- `&=`
+- `'`
+- `*/`
+- `*=`
+- `-=`
+- `..`
+- `...
+- `..=`
+- `/*`
+- `//`
+- `/=`
+- `?`
 
 ## TS
 
