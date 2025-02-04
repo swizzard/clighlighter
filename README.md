@@ -104,8 +104,9 @@ Options:
 ## todo
 
 - [ ] coverage
-  - [ ] more `kind`s
+  - [x] more `kind`s
   - [ ] non-alpha `kind`s/mapping names
+  - [ ] use `Node.is_named()`
 - [x] flexibility
   - [x] trait
   - [x] not just ts
