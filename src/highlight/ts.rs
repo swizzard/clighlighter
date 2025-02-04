@@ -1,7 +1,33 @@
 use crate::highlight::Highlight;
 use crate::shared::{initial_padding, node_text};
+use std::collections::HashSet;
 use std::fmt::Write;
+use std::sync::LazyLock;
 use tree_sitter::{Language, Node, Point};
+
+static TS_SPECIAL: LazyLock<HashSet<&str>> = LazyLock::new(|| {
+    HashSet::from([
+        "as",
+        "const",
+        "export",
+        "function",
+        "identifier",
+        "interface",
+        "literal_type",
+        "new",
+        "number",
+        "property_identifier",
+        "return",
+        "type_identifier",
+        "undefined",
+    ])
+});
+
+static TS_REGULAR: LazyLock<HashSet<&str>> = LazyLock::new(|| {
+    HashSet::from([
+        "=", "<", ">", "(", ")", "{", "}", "|", ";", ",", "=>", "===", ":", "?", ".",
+    ])
+});
 
 pub struct TS;
 
@@ -10,42 +36,12 @@ impl TS {
         if k == "literal_type" && txt == "undefined" {
             false
         } else {
-            matches!(
-                k,
-                "as" | "const"
-                    | "export"
-                    | "function"
-                    | "identifier"
-                    | "interface"
-                    | "literal_type"
-                    | "new"
-                    | "number"
-                    | "property_identifier"
-                    | "return"
-                    | "type_identifier"
-                    | "undefined"
-            )
+            TS_SPECIAL.contains(k)
         }
     }
 
     fn is_regular_node(k: &str) -> bool {
-        matches!(
-            k,
-            "=" | "<"
-                | ">"
-                | "("
-                | ")"
-                | "{"
-                | "}"
-                | "|"
-                | ";"
-                | ","
-                | "=>"
-                | "==="
-                | ":"
-                | "?"
-                | "."
-        )
+        TS_REGULAR.contains(k)
     }
 }
 
