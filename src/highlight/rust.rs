@@ -15,7 +15,6 @@ static RUST_SPECIAL: LazyLock<HashSet<&str>> = LazyLock::new(|| {
         "char_literal",
         "const",
         "crate",
-        "doc_comment",
         "dyn",
         "else",
         "enum",
@@ -30,6 +29,7 @@ static RUST_SPECIAL: LazyLock<HashSet<&str>> = LazyLock::new(|| {
         "in",
         "integer_literal",
         "let",
+        "line_comment",
         "loop",
         "match",
         "mod",
@@ -55,7 +55,7 @@ static RUST_REGULAR: LazyLock<HashSet<&str>> = LazyLock::new(|| {
         "(", ")", ";", "::", "{", "}", ",", ":", "=", ".", "<", ">", "'", "_", "!", "->", "=>",
         "#", "[", "]", "!=", "%", "&&", "&", "*", "+", "-", "/", "<<", "<<=", "<=", "==", ">=",
         ">>=", ">>", "||", "|", "#", "$", "%", "%=", "&=", "'", "*/", "*=", "-=", "..", "...",
-        "..=", "/*", "//", "/=", "?",
+        "..=", "/*", "/=", "?",
     ])
 });
 

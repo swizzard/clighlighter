@@ -14,7 +14,8 @@ pub fn highlight_input(
     }: Cli,
 ) -> std::io::Result<()> {
     let inf = std::fs::read_to_string(in_file)?;
-    let highlighter = get_highlighter(highlighter);
+    // let highlighter = get_highlighter(highlighter);
+    let highlighter = highlight::explore::ExploreAll::new_rust();
     let mut o: Box<dyn io::Write> = if let Some(of_name) = out_file {
         Box::new(
             std::fs::OpenOptions::new()
@@ -26,7 +27,8 @@ pub fn highlight_input(
     } else {
         Box::new(io::stdout().lock())
     };
-    highlight(highlighter.deref(), &inf, &mut o)
+    // highlight(highlighter.deref(), &inf, &mut o)
+    highlight(&highlighter, &inf, &mut o)
 }
 
 pub fn get_highlighter(hc: cli::HighlighterChoice) -> Box<dyn Highlight> {

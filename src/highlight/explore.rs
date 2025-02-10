@@ -68,6 +68,12 @@ impl Highlight for ExploreAll {
     }
     fn highlight_node(&self, node: &Node, input: &[u8], _prev_end: Option<Point>) -> String {
         let txt = node_text(node, input);
-        format!("{:?} {}\n", node, txt)
+        let is_named = if node.is_named() { "named" } else { "unnamed" };
+        let is_extra = if node.is_extra() {
+            "extra"
+        } else {
+            "not extra"
+        };
+        format!("{:?} {} ({}, {})\n", node, txt, is_named, is_extra)
     }
 }
