@@ -121,5 +121,5 @@ Options:
 and add your new highlighter to [the enum](src/cli.rs) and
 [the mapping function](src/lib.rs).
 
-the `explore` feature gates [highlighters](src/highlight/explore.rs) that print node debug info,
+the highlighters in [explore](src/highlight/explore.rs) print node debug info,
 they might help you.
