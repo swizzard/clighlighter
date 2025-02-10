@@ -10,12 +10,12 @@ static RUST_SPECIAL: LazyLock<HashSet<&str>> = LazyLock::new(|| {
         "as",
         "async",
         "await",
-        "block_comment",
         "boolean_literal", // NOT "false", "true"
         "break",
         "char_literal",
         "const",
         "crate",
+        "doc_comment",
         "dyn",
         "else",
         "enum",
@@ -30,7 +30,6 @@ static RUST_SPECIAL: LazyLock<HashSet<&str>> = LazyLock::new(|| {
         "in",
         "integer_literal",
         "let",
-        "line_comment", // includes newline
         "loop",
         "match",
         "mod",
