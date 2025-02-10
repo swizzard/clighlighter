@@ -1,5 +1,5 @@
 use crate::highlight::Highlight;
-use crate::shared::node_text;
+use crate::highlight::shared::node_text;
 use std::collections::HashSet;
 use tree_sitter::{Language, Node, Point};
 
@@ -51,15 +51,14 @@ pub struct ExploreAll {
 }
 
 impl ExploreAll {
+    pub fn new(l: Language) -> Self {
+        Self { l }
+    }
     pub fn new_ts() -> Self {
-        Self {
-            l: tree_sitter_typescript::LANGUAGE_TYPESCRIPT.into(),
-        }
+        Self::new(tree_sitter_typescript::LANGUAGE_TYPESCRIPT.into())
     }
     pub fn new_rust() -> Self {
-        Self {
-            l: tree_sitter_rust::LANGUAGE.into(),
-        }
+        Self::new(tree_sitter_rust::LANGUAGE.into())
     }
 }
 

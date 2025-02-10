@@ -1,5 +1,5 @@
 use crate::highlight::Highlight;
-use crate::shared::{initial_padding, node_text};
+use crate::highlight::shared::{initial_padding, node_text};
 use std::collections::HashSet;
 use std::fmt::Write;
 use std::sync::LazyLock;

@@ -1,6 +1,5 @@
 pub mod cli;
 pub mod highlight;
-pub(crate) mod shared;
 
 pub use cli::Cli;
 pub use highlight::{Highlight, highlight};
