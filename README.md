@@ -111,7 +111,7 @@ Options:
   - [x] trait
   - [x] not just ts
   - [x] cli argument
-- [ ] improve performance by writing directly to output
+- [x] improve performance by writing directly to output
 - [ ] read input from cli
 - [ ] tests
 

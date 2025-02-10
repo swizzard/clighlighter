@@ -6,21 +6,18 @@ use std::io::Write;
 use std::ops::Deref;
 fn main() -> io::Result<()> {
     let cli = Cli::parse();
-    let inf = std::fs::read_to_string(cli.in_file).expect("not utf8");
+    let inf = std::fs::read_to_string(cli.in_file)?;
     let highlighter = get_highlighter(cli.highlighter);
-    let h = highlight(highlighter.deref(), &inf);
-    if let Some(of_name) = cli.out_file {
-        let mut o = std::fs::OpenOptions::new()
-            .create_new(true)
-            .write(true)
-            .truncate(true)
-            .open(of_name)?;
-        o.write_all(h.as_bytes())?;
-        o.flush()?;
+    let mut o: Box<dyn Write> = if let Some(of_name) = cli.out_file {
+        Box::new(
+            std::fs::OpenOptions::new()
+                .create_new(true)
+                .write(true)
+                .truncate(true)
+                .open(of_name)?,
+        )
     } else {
-        let mut o = io::stdout().lock();
-        o.write_all(h.as_bytes())?;
-        o.flush()?;
-    }
-    Ok(())
+        Box::new(io::stdout().lock())
+    };
+    highlight(highlighter.deref(), &inf, &mut o)
 }

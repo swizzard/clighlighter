@@ -107,7 +107,7 @@ impl Highlight for TS {
     fn language(&self) -> Language {
         tree_sitter_typescript::LANGUAGE_TYPESCRIPT.into()
     }
-    fn highlight_node(&self, node: &Node, input: &str, prev_end: Option<Point>) -> String {
+    fn highlight_node(&self, node: &Node, input: &[u8], prev_end: Option<Point>) -> String {
         let k = node.kind();
         let txt = node_text(node, input);
         if TS::is_special_node(k, txt) {

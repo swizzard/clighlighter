@@ -3,41 +3,44 @@ pub mod explore;
 pub mod rust;
 pub mod ts;
 
-use std::fmt::Write;
+use std::io::{self, Write};
 use tree_sitter::{Language, Node, Parser, Point, TreeCursor};
 
 pub trait Highlight {
     fn language(&self) -> Language;
-    fn highlight_node(&self, node: &Node, input: &str, prev_end: Option<Point>) -> String;
+    fn highlight_node(&self, node: &Node, input: &[u8], prev_end: Option<Point>) -> String;
 }
 
-pub fn highlight(h: &dyn Highlight, input: &str) -> String {
+pub fn highlight<I>(h: &dyn Highlight, input: &I, output: &mut dyn Write) -> io::Result<()>
+where
+    I: AsRef<[u8]>,
+{
     let mut parser = Parser::new();
     parser
         .set_language(&h.language())
         .expect("Error loading Typescript grammar");
     let tree = parser.parse(input, None).unwrap();
-    let mut output = String::from("<pre class=\"code\">\n");
+    output.write_all(b"<pre class=\"code\">\n")?;
     let mut cursor = tree.walk();
     let mut more = cursor.goto_first_child();
     while more {
-        more = handle_statement(h, &mut cursor, &mut output, input, None);
+        more = handle_statement(h, &mut cursor, output, input.as_ref(), None)?;
     }
-    output.push_str("\n</pre>");
-    output
+    output.write_all(b"\n</pre>")?;
+    Ok(())
 }
 
 fn handle_statement(
     h: &dyn Highlight,
     cursor: &mut TreeCursor<'_>,
-    output: &mut String,
-    input: &str,
+    output: &mut dyn Write,
+    input: &[u8],
     prev_end: Option<Point>,
-) -> bool {
+) -> io::Result<bool> {
     let n = cursor.node();
     let highlit = h.highlight_node(&n, input, prev_end);
     let pe = if !highlit.is_empty() {
-        write!(output, "{}", highlit).expect("can't write");
+        output.write_all(highlit.as_bytes())?;
         Some(n.end_position())
     } else {
         prev_end
@@ -45,7 +48,7 @@ fn handle_statement(
     if next_more(cursor, false) {
         handle_statement(h, cursor, output, input, pe)
     } else {
-        false
+        Ok(false)
     }
 }
 
