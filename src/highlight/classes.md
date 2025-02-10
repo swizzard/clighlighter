@@ -24,12 +24,12 @@ do not find them particularly informative. using the debug-printing `highlighter
 - `as`
 - `async`
 - `await`
-- `block_comment`
 - `boolean_literal` (NOT `false`, `true`)
 - `break`
 - `char_literal`
 - `const`
 - `crate`
+- `doc_comment`
 - `dyn`
 - `else`
 - `enum`
