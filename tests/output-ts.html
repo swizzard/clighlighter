@@ -1,0 +1,41 @@
+<pre class="code">
+<code class="export">export</code> <code class="interface">interface</code> <code class="type_identifier">M</code><<code class="type_identifier">K</code>, <code class="type_identifier">V</code>> {
+  <code class="property_identifier">get</code>: (<code class="identifier">k</code>: <code class="type_identifier">K</code>) => <code class="type_identifier">V</code> | <code class="undefined">undefined</code>;
+}
+<code class="export">export</code> <code class="function">function</code> <code class="identifier">newMapObject</code><<code class="type_identifier">K</code>, <code class="type_identifier">V</code>>(): <code class="type_identifier">Map</code><<code class="type_identifier">K</code>, <code class="type_identifier">V</code>> {
+  <code class="return">return</code> <code class="new">new</code> <code class="identifier">Map</code>();
+}
+
+<code class="export">export</code> <code class="function">function</code> <code class="identifier">newMapFunction</code><<code class="type_identifier">K</code>, <code class="type_identifier">V</code>>(): <code class="type_identifier">M</code><<code class="type_identifier">K</code>, <code class="type_identifier">V</code>> {
+  <code class="return">return</code> <code class="object">{
+    get: (_k: K) => {
+      return undefined;
+    },
+  }</code>      {
+    <code class="property_identifier">get</code>: (<code class="identifier">_k</code>: <code class="type_identifier">K</code>) => {
+      <code class="return">return</code> <code class="undefined">undefined</code>;
+    },
+  };
+}
+
+<code class="export">export</code> <code class="function">function</code> <code class="identifier">setMapObject</code><<code class="type_identifier">K</code>, <code class="type_identifier">V</code>>(<code class="identifier">m</code>: <code class="type_identifier">Map</code><<code class="type_identifier">K</code>, <code class="type_identifier">V</code>>, <code class="identifier">k</code>: <code class="type_identifier">K</code>, <code class="identifier">v</code>: <code class="type_identifier">V</code>): <code class="type_identifier">Map</code><<code class="type_identifier">K</code>, <code class="type_identifier">V</code>> {
+  <code class="return">return</code> <code class="identifier">m</code>.<code class="property_identifier">set</code>(<code class="identifier">k</code>, <code class="identifier">v</code>);
+}
+
+<code class="export">export</code> <code class="function">function</code> <code class="identifier">setMapFunction</code><<code class="type_identifier">K</code>, <code class="type_identifier">V</code>>(<code class="identifier">m</code>: <code class="type_identifier">M</code><<code class="type_identifier">K</code>, <code class="type_identifier">V</code>>, <code class="identifier">k</code>: <code class="type_identifier">K</code>, <code class="identifier">v</code>: <code class="type_identifier">V</code>): <code class="type_identifier">M</code><<code class="type_identifier">K</code>, <code class="type_identifier">V</code>> {
+  <code class="return">return</code> <code class="object">{
+    get: (key: K) => (key === k ? v : m.get(k)),
+  }</code>      {
+    <code class="property_identifier">get</code>: (<code class="identifier">key</code>: <code class="type_identifier">K</code>) => (<code class="identifier">key</code> === <code class="identifier">k</code> ? <code class="identifier">v</code> : <code class="identifier">m</code>.<code class="property_identifier">get</code>(<code class="identifier">k</code>)),
+  };
+}
+
+<code class="export">export</code> <code class="function">function</code> <code class="identifier">delMapObject</code><<code class="type_identifier">K</code>, <code class="type_identifier">V</code>>(<code class="identifier">m</code>: <code class="type_identifier">Map</code><<code class="type_identifier">K</code>, <code class="type_identifier">V</code>>, <code class="identifier">k</code>: <code class="type_identifier">K</code>): <code class="type_identifier">Map</code><<code class="type_identifier">K</code>, <code class="type_identifier">V</code>> {
+  <code class="identifier">m</code>.<code class="property_identifier">delete</code>(<code class="identifier">k</code>);
+  <code class="return">return</code> <code class="identifier">m</code>;
+}
+
+<code class="export">export</code> <code class="function">function</code> <code class="identifier">delMapFunction</code><<code class="type_identifier">K</code>, <code class="type_identifier">V</code>>(<code class="identifier">m</code>: <code class="type_identifier">M</code><<code class="type_identifier">K</code>, <code class="type_identifier">V</code>>, <code class="identifier">k</code>: <code class="type_identifier">K</code>): <code class="type_identifier">M</code><<code class="type_identifier">K</code>, <code class="type_identifier">V</code>> {
+  <code class="return">return</code> <code class="identifier">setMapFunction</code>(<code class="identifier">m</code>, <code class="identifier">k</code>, <code class="undefined">undefined</code>) <code class="as">as</code> <code class="type_identifier">M</code><<code class="type_identifier">K</code>, <code class="type_identifier">V</code>>;
+}
+</pre>
