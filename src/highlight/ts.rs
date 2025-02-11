@@ -122,4 +122,7 @@ impl Highlight for TS {
             String::new()
         }
     }
+    fn should_highlight_children(&self, _node: &Node) -> bool {
+        true
+    }
 }

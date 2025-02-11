@@ -44,6 +44,9 @@ impl Highlight for Explore {
             String::new()
         }
     }
+    fn should_highlight_children(&self, _node: &Node) -> bool {
+        true
+    }
 }
 
 pub struct ExploreAll {
@@ -69,5 +72,8 @@ impl Highlight for ExploreAll {
     fn highlight_node(&self, node: &Node, input: &[u8], _prev_end: Option<Point>) -> String {
         let txt = node_text(node, input);
         format!("{:?} {}\n", node, txt)
+    }
+    fn should_highlight_children(&self, _node: &Node) -> bool {
+        true
     }
 }

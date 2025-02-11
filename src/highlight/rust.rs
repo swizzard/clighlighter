@@ -29,6 +29,7 @@ static RUST_SPECIAL: LazyLock<HashSet<&str>> = LazyLock::new(|| {
         "impl",
         "in",
         "integer_literal",
+        "line_comment",
         "let",
         "loop",
         "match",
@@ -58,6 +59,8 @@ static RUST_REGULAR: LazyLock<HashSet<&str>> = LazyLock::new(|| {
         "..=", "/*", "//", "/=", "?",
     ])
 });
+static RUST_SKIP_KIDS: LazyLock<HashSet<&str>> =
+    LazyLock::new(|| HashSet::from(["doc_comment", "line_comment"]));
 
 pub struct Rust;
 
@@ -67,6 +70,9 @@ impl Rust {
     }
     fn is_regular_node(k: &str) -> bool {
         RUST_REGULAR.contains(k)
+    }
+    fn should_skip_kids(k: &str) -> bool {
+        RUST_SKIP_KIDS.contains(k)
     }
 }
 
@@ -88,5 +94,8 @@ impl Highlight for Rust {
         } else {
             String::new()
         }
+    }
+    fn should_highlight_children(&self, node: &Node) -> bool {
+        !Rust::should_skip_kids(node.kind())
     }
 }

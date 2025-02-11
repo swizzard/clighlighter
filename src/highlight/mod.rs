@@ -9,6 +9,7 @@ use tree_sitter::{Language, Node, Parser, Point, TreeCursor};
 pub trait Highlight {
     fn language(&self) -> Language;
     fn highlight_node(&self, node: &Node, input: &[u8], prev_end: Option<Point>) -> String;
+    fn should_highlight_children(&self, node: &Node) -> bool;
 }
 
 pub fn highlight<I>(h: &dyn Highlight, input: &I, output: &mut dyn Write) -> io::Result<()>
@@ -45,15 +46,15 @@ fn handle_statement(
     } else {
         prev_end
     };
-    if next_more(cursor, false) {
+    if next_more(cursor, h.should_highlight_children(&n)) {
         handle_statement(h, cursor, output, input, pe)
     } else {
         Ok(false)
     }
 }
 
-fn next_more(cursor: &mut TreeCursor<'_>, skip_child: bool) -> bool {
-    let mut more = if skip_child {
+fn next_more(cursor: &mut TreeCursor<'_>, should_highlight_children: bool) -> bool {
+    let mut more = if !should_highlight_children {
         false
     } else {
         cursor.goto_first_child()
@@ -65,8 +66,7 @@ fn next_more(cursor: &mut TreeCursor<'_>, skip_child: bool) -> bool {
         if !cursor.goto_parent() {
             return false;
         }
-        more = next_more(cursor, true);
+        more = next_more(cursor, false);
     };
-
     more
 }
