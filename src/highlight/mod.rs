@@ -1,3 +1,9 @@
+//! # highlight
+//!
+//! the core functionality of the app is
+//! - the [`Highlight`] trait and
+//! - tree traversal via [`next_more`]
+//!
 pub mod explore;
 pub mod rust;
 mod shared;
@@ -7,7 +13,9 @@ use std::io::{self, Write};
 use tree_sitter::{Language, Node, Parser, Point, TreeCursor};
 
 pub trait Highlight {
+    /// the tree-sitter [`Language`] used by this highlighter
     fn language(&self) -> Language;
+    /// turns a [`Node`] into highlighted text
     fn highlight_node(&self, node: &Node, input: &[u8], prev_end: Option<Point>) -> Option<String>;
     fn should_highlight_children(&self, node: &Node) -> bool;
 }
@@ -19,7 +27,7 @@ where
     let mut parser = Parser::new();
     parser
         .set_language(&h.language())
-        .expect("Error loading Typescript grammar");
+        .expect("Error loading grammar");
     let tree = parser.parse(input, None).unwrap();
     output.write_all(b"<pre class=\"code\">\n")?;
     let mut cursor = tree.walk();

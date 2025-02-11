@@ -1,3 +1,6 @@
+//! # Clighlight
+//!
+//! a command-line utility for CSS-friendly code highlighting
 use clap::Parser;
 use clighlighter::{Cli, highlight_input};
 use std::io;
