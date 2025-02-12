@@ -8,7 +8,7 @@ use tree_sitter::{Language, Node, Parser, Point, TreeCursor};
 
 pub trait Highlight {
     fn language(&self) -> Language;
-    fn highlight_node(&self, node: &Node, input: &[u8], prev_end: Option<Point>) -> String;
+    fn highlight_node(&self, node: &Node, input: &[u8], prev_end: Option<Point>) -> Option<String>;
     fn should_highlight_children(&self, node: &Node) -> bool;
 }
 
@@ -39,15 +39,14 @@ fn handle_statement(
     prev_end: Option<Point>,
 ) -> io::Result<bool> {
     let n = cursor.node();
-    let highlit = h.highlight_node(&n, input, prev_end);
-    let pe = if !highlit.is_empty() {
+    let next_end = if let Some(highlit) = h.highlight_node(&n, input, prev_end) {
         output.write_all(highlit.as_bytes())?;
         Some(n.end_position())
     } else {
         prev_end
     };
     if next_more(cursor, h.should_highlight_children(&n)) {
-        handle_statement(h, cursor, output, input, pe)
+        handle_statement(h, cursor, output, input, next_end)
     } else {
         Ok(false)
     }

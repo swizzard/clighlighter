@@ -33,15 +33,20 @@ impl Highlight for Explore {
     fn language(&self) -> Language {
         self.l.clone()
     }
-    fn highlight_node(&self, node: &Node, input: &[u8], _prev_end: Option<Point>) -> String {
+    fn highlight_node(
+        &self,
+        node: &Node,
+        input: &[u8],
+        _prev_end: Option<Point>,
+    ) -> Option<String> {
         let k = node.kind();
         let txt = node_text(node, input);
         if self.special.contains(k) {
-            format!("special node {:?} {}\n", node, txt)
+            Some(format!("special node {:?} {}\n", node, txt))
         } else if self.regular.contains(k) {
-            format!("regular node {:?} {}\n", node, txt)
+            Some(format!("regular node {:?} {}\n", node, txt))
         } else {
-            String::new()
+            None
         }
     }
     fn should_highlight_children(&self, _node: &Node) -> bool {
@@ -69,9 +74,14 @@ impl Highlight for ExploreAll {
     fn language(&self) -> Language {
         self.l.clone()
     }
-    fn highlight_node(&self, node: &Node, input: &[u8], _prev_end: Option<Point>) -> String {
+    fn highlight_node(
+        &self,
+        node: &Node,
+        input: &[u8],
+        _prev_end: Option<Point>,
+    ) -> Option<String> {
         let txt = node_text(node, input);
-        format!("{:?} {}\n", node, txt)
+        Some(format!("{:?} {}\n", node, txt))
     }
     fn should_highlight_children(&self, _node: &Node) -> bool {
         true
