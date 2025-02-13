@@ -4,7 +4,7 @@ ok so i wanted a minimally-fussy code highlighter
 
 this is basically that
 
-code goes in, html comes out
+code goes in, html comes out  
 formatting (whitespace) is maintained
 
 ## example

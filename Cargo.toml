@@ -1,7 +1,14 @@
 [package]
 name = "clighlighter"
-version = "0.5.1"
+version = "1.0.0-rc1"
 edition = "2024"
+license = "MIT"
+description = "simple command-line code highlighter"
+homepage = "https://github.com/swizzard/clighlighter"
+repository = "https://github.com/swizzard/clighlighter"
+readme = "README.md"
+keywords = ["highlighting", "html"]
+categories = ["command-line-utilities"]
 
 [build-dependencies]
 cc = "*"
