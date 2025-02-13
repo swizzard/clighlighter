@@ -39,7 +39,7 @@ pub fn highlight_input(
     highlight(highlighter.deref(), &inf, &mut o)
 }
 
-/// mapping between a [`cli::HighlighterChoice`] and a [`highlight::Highlight`] implementor
+/// mapping between a [`cli::HighlighterChoice`] and a [`highlight::Highlight`] implementation
 pub fn get_highlighter(hc: cli::HighlighterChoice) -> Box<dyn Highlight> {
     match hc {
         cli::HighlighterChoice::TS => Box::new(highlight::ts::TS),

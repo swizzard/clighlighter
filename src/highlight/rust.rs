@@ -1,3 +1,4 @@
+//! highlighter for Rust code
 use crate::highlight::Highlight;
 use crate::highlight::shared::{initial_padding, node_text};
 use std::collections::HashSet;
@@ -5,6 +6,10 @@ use std::fmt::Write;
 use std::sync::LazyLock;
 use tree_sitter::{Language, Node, Point};
 
+// I'm not sure if this LazyLock + static methods thing is a good pattern or not
+// but I'm going with it
+
+/// "special" [`Node::kind`]s that we highlight
 static RUST_SPECIAL: LazyLock<HashSet<&str>> = LazyLock::new(|| {
     HashSet::from([
         "as",
@@ -29,8 +34,8 @@ static RUST_SPECIAL: LazyLock<HashSet<&str>> = LazyLock::new(|| {
         "impl",
         "in",
         "integer_literal",
-        "line_comment",
         "let",
+        "line_comment",
         "loop",
         "match",
         "mod",
@@ -51,6 +56,7 @@ static RUST_SPECIAL: LazyLock<HashSet<&str>> = LazyLock::new(|| {
         "while",
     ])
 });
+/// "regular" [`Node::kind`]s that we print out as-is
 static RUST_REGULAR: LazyLock<HashSet<&str>> = LazyLock::new(|| {
     HashSet::from([
         "(", ")", ";", "::", "{", "}", ",", ":", "=", ".", "<", ">", "'", "_", "!", "->", "=>",
@@ -59,6 +65,7 @@ static RUST_REGULAR: LazyLock<HashSet<&str>> = LazyLock::new(|| {
         "..=", "/*", "//", "/=", "?",
     ])
 });
+/// [`Node::kind`]s whose children should be skipped
 static RUST_SKIP_KIDS: LazyLock<HashSet<&str>> =
     LazyLock::new(|| HashSet::from(["doc_comment", "line_comment"]));
 
@@ -95,6 +102,7 @@ impl Highlight for Rust {
             None
         }
     }
+    /// determined by [`Node::kind`]
     fn should_highlight_children(&self, node: &Node) -> bool {
         !Rust::should_skip_kids(node.kind())
     }

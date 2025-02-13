@@ -1,5 +1,9 @@
+//! shared utility functions for highlighters
 use tree_sitter::{Node, Point};
-pub(crate) fn initial_padding(node: &Node, prev_end: Option<Point>) -> String {
+
+/// helper function that calculates leading whitespace based on the start of the current [`Node`]
+/// and the end of the previous node
+pub fn initial_padding(node: &Node, prev_end: Option<Point>) -> String {
     let mut s = String::new();
     let Point {
         row: new_row,
@@ -28,6 +32,7 @@ pub(crate) fn initial_padding(node: &Node, prev_end: Option<Point>) -> String {
     s
 }
 
-pub(crate) fn node_text<'a>(node: &'a tree_sitter::Node, input: &'a [u8]) -> &'a str {
+/// helper function to extract the text associated with a [`Node`]
+pub fn node_text<'a>(node: &'a tree_sitter::Node, input: &'a [u8]) -> &'a str {
     node.utf8_text(input).expect("non-utf8 input")
 }

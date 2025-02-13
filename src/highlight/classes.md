@@ -120,6 +120,11 @@ do not find them particularly informative. using the debug-printing `highlighter
 - `/=`
 - `?`
 
+### kinds whose children will be ignored
+
+- `doc_comment`
+- `line_comment`
+
 ## TS
 
 ### special kinds (will be rendered as `<code class="...">...</code>`)

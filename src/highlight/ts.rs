@@ -1,3 +1,4 @@
+//! highlighter for TypeScript code
 use crate::highlight::Highlight;
 use crate::highlight::shared::{initial_padding, node_text};
 use std::collections::HashSet;
@@ -5,6 +6,10 @@ use std::fmt::Write;
 use std::sync::LazyLock;
 use tree_sitter::{Language, Node, Point};
 
+// I'm not sure if this LazyLock + static methods thing is a good pattern or not
+// but I'm going with it
+
+/// "special" [`Node::kind`]s that we highlight
 static TS_SPECIAL: LazyLock<HashSet<&str>> = LazyLock::new(|| {
     HashSet::from([
         "any",
@@ -76,7 +81,7 @@ static TS_SPECIAL: LazyLock<HashSet<&str>> = LazyLock::new(|| {
         "yield",
     ])
 });
-
+/// "regular" [`Node::kind`]s that we print out as-is
 static TS_REGULAR: LazyLock<HashSet<&str>> = LazyLock::new(|| {
     HashSet::from([
         "!", "!=", "!==", "=", "<", ">", "(", ")", "{", "}", "|", ";", ",", "=>", "===", ":", "?",
@@ -122,6 +127,7 @@ impl Highlight for TS {
             None
         }
     }
+    /// always `true`
     fn should_highlight_children(&self, _node: &Node) -> bool {
         true
     }
