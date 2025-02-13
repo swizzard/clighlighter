@@ -11,7 +11,7 @@ keywords = ["highlighting", "html"]
 categories = ["command-line-utilities"]
 
 [build-dependencies]
-cc = "*"
+cc = "~1.2.13"
 
 [dependencies]
 clap = { version = "4.5.27", features = ["cargo", "derive"] }
